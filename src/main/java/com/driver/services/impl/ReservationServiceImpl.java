@@ -46,7 +46,7 @@ public class ReservationServiceImpl implements ReservationService {
 
 
         if(parkingLot == null ||user == null || spotList == null ){
-            throw  new Exception("Cannot make reservation");
+            return  null;
         }
 
 
