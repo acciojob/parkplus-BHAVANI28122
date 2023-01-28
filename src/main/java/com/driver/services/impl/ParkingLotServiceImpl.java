@@ -52,7 +52,7 @@ public class ParkingLotServiceImpl implements ParkingLotService {
           List<Spot> spotList = parkingLot.getSpotList();
           spotList.add(spot);
           parkingLot.setSpotList(spotList);
-          parkingLotRepository1.delete(parkingLot);
+          parkingLotRepository1.save(parkingLot);
 
           return  spot;
 
