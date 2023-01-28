@@ -77,7 +77,6 @@ public class ParkingLotServiceImpl implements ParkingLotService {
 
         ParkingLot parkingLot = parkingLotRepository1.findById(parkingLotId).get();
 
-        if(parkingLot != null) {
             Spot spot = new Spot();
             spot.setId(spotId);
             spot.setPricePerHour(pricePerHour);
@@ -86,8 +85,6 @@ public class ParkingLotServiceImpl implements ParkingLotService {
             spot.setParkingLot(parkingLot);
             parkingLotRepository1.save(parkingLot);
             return spot;
-        }
-        return  null;
 
     }
 
