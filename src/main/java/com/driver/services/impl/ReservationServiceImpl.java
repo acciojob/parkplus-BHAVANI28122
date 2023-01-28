@@ -55,7 +55,7 @@ public class ReservationServiceImpl implements ReservationService {
         for(Spot spot1:spotList){
 
 
-          if(spot == null ||spot1.getPricePerHour()*reservation.getNumberOfHours() < min){
+          if( spot1.getPricePerHour()*reservation.getNumberOfHours() < min){
 
               spot = spot1;
           }
