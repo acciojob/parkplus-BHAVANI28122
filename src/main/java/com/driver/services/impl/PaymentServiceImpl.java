@@ -39,7 +39,7 @@ public class PaymentServiceImpl implements PaymentService {
 
             Payment payment = new Payment();
             payment.setReservation(reservation);
-
+            payment.setPaymentMode(PaymentMode.CASH);
             payment.setPaymentCompleted(true);
 
             reservation.setPayment(payment);
