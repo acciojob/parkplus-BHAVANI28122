@@ -28,14 +28,28 @@ public class PaymentServiceImpl implements PaymentService {
 
         Reservation reservation = reservationRepository2.findById(reservationId).get();
 
-        Payment payment = new Payment();
 
-        payment.setReservation(reservation);
+        int bill = reservation.getNumberOfHours() * reservation.getSpot().getPricePerHour();
 
-        payment.setPaymentMode(PaymentMode.valueOf(mode));
+        if(amountSent < bill){
 
+            throw new Exception("Insufficient Amount");
+        }
+        else{
 
-        return payment;
+            Payment payment = new Payment();
+            payment.setReservation(reservation);
+
+            payment.setPaymentMode(PaymentMode.valueOf(mode));
+
+            payment.setPaymentCompleted(true);
+
+            reservation.setPayment(payment);
+
+            reservationRepository2.save(reservation);
+
+            return payment;
+        }
 
     }
 }
