@@ -32,20 +32,11 @@ public class ReservationServiceImpl implements ReservationService {
 
         ParkingLot parkingLot = parkingLotRepository3.findById(parkingLotId).get();
 
-        if(parkingLot == null){
-            return null;
-        }
-
 
         Reservation reservation = new Reservation();
         reservation.setNumberOfHours(timeInHours);
 
         User user = userRepository3.findById(userId).get();
-
-        if(user == null){
-            return null;
-        }
-
 
         Spot spot = null;
 
@@ -72,12 +63,12 @@ public class ReservationServiceImpl implements ReservationService {
         }
         reservation.setUser(user);
         reservation.setSpot(spot);
-        if(numberOfWheels < 2){
+        if(numberOfWheels == 2){
 
             reservation.getSpot().setSpotType(SpotType.TWO_WHEELER);
 
         }
-        else if(numberOfWheels < 4){
+        else if(numberOfWheels == 4){
             reservation.getSpot().setSpotType(SpotType.FOUR_WHEELER);
         }
         else {

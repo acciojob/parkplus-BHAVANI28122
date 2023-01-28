@@ -76,6 +76,9 @@ public class ParkingLotServiceImpl implements ParkingLotService {
             spot.setSpotType(SpotType.TWO_WHEELER);
             spot.setOccupied(false);
             spot.setParkingLot(parkingLot);
+            List<Spot> spotList = parkingLot.getSpotList();
+            spotList.add(spot);
+            parkingLot.setSpotList(spotList);
             parkingLotRepository1.save(parkingLot);
             return spot;
 
