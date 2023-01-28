@@ -75,7 +75,9 @@ public class ReservationServiceImpl implements ReservationService {
             reservation.getSpot().setSpotType(SpotType.OTHERS);
         }
 
+        spot.setOccupied(true);
         reservationRepository3.save(reservation);
+
 
         return  reservation;
 
