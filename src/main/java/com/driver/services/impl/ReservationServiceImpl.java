@@ -46,7 +46,7 @@ public class ReservationServiceImpl implements ReservationService {
 
 
         if(parkingLot == null ||user == null || spotList == null ){
-            return  null;
+            throw  new Exception("Cannot make reservation");
         }
 
 
@@ -55,7 +55,7 @@ public class ReservationServiceImpl implements ReservationService {
         for(Spot spot1:spotList){
 
 
-          if(spot1.getPricePerHour()*reservation.getNumberOfHours() < min){
+          if(spot == null ||spot1.getPricePerHour()*reservation.getNumberOfHours() < min){
 
               spot = spot1;
           }
