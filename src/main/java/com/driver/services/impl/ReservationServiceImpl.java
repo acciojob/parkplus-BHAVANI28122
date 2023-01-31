@@ -70,6 +70,7 @@ public class ReservationServiceImpl implements ReservationService {
                 throw new Exception("Cannot make reservation");
             }
 
+
             Reservation reservation = new Reservation();
             reservation.setNumberOfHours(timeInHours);
             reservation.setSpot(spot);
@@ -94,6 +95,7 @@ public class ReservationServiceImpl implements ReservationService {
 
             reservationList1.add(reservation);
             spot.setReservationList(reservationList1);
+            spot.setOccupied(true);
 
             spotRepository3.save(spot);
 
