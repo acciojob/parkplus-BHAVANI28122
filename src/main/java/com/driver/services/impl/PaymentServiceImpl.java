@@ -39,7 +39,7 @@ public class PaymentServiceImpl implements PaymentService {
         }
 
             PaymentMode paymentMode = null;
-            mode = mode.toLowerCase();
+            mode = mode.toUpperCase();
 
         if(mode.equals("CASH")) {
             paymentMode = PaymentMode.CASH;
