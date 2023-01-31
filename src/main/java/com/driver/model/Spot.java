@@ -24,10 +24,10 @@ public class Spot {
     @OneToMany(mappedBy = "spot",cascade = CascadeType.ALL)
     private List<Reservation> reservationList = new ArrayList<>();
 
-    public Spot(SpotType spotType, int pricePerHour, boolean occupied) {
+    public Spot(SpotType spotType, int pricePerHour,ParkingLot parkingLot) {
         this.spotType = spotType;
         this.pricePerHour = pricePerHour;
-        this.occupied = false;
+        this.parkingLot = parkingLot;
     }
     public Spot(){
 

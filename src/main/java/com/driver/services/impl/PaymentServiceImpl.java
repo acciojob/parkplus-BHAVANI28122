@@ -9,6 +9,8 @@ import com.driver.services.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Locale;
+
 @Service
 public class PaymentServiceImpl implements PaymentService {
     @Autowired
@@ -35,11 +37,22 @@ public class PaymentServiceImpl implements PaymentService {
 
             throw new Exception("Insufficient Amount");
         }
-        else{
+
+            PaymentMode paymentMode = null;
+            mode = mode.toLowerCase();
+
+        if(mode.equals("CASH"))
+            paymentMode = PaymentMode.CASH;
+        else if (mode.equals("CARD"))
+            paymentMode = PaymentMode.CARD;
+        else if (mode.equals("UPI"))
+            paymentMode = PaymentMode.UPI;
+        else
+            throw new Exception("Payment mode not detected");
 
             Payment payment = new Payment();
             payment.setReservation(reservation);
-            payment.setPaymentMode(PaymentMode.CASH);
+            payment.setPaymentMode(paymentMode);
             payment.setPaymentCompleted(true);
 
             reservation.setPayment(payment);
@@ -47,7 +60,6 @@ public class PaymentServiceImpl implements PaymentService {
             reservationRepository2.save(reservation);
 
             return payment;
-        }
 
     }
 }

@@ -35,14 +35,22 @@ public class ParkingLotServiceImpl implements ParkingLotService {
 
         ParkingLot parkingLot = parkingLotRepository1.findById(parkingLotId).get();
 
-          Spot spot = new Spot();
-          spot.setParkingLot(parkingLot);
-          spot.setPricePerHour(pricePerHour);
-          spot.setOccupied(false);
+         SpotType spotType = SpotType.OTHERS;
 
-          spot.setSpotType(SpotType.TWO_WHEELER);
+         if(numberOfWheels <= 2){
+             spotType =SpotType.TWO_WHEELER;
+         } else if (numberOfWheels <=4) {
+             spotType =SpotType.FOUR_WHEELER;
+         }
 
-          List<Spot> spotList = parkingLot.getSpotList();
+         Spot spot = new Spot(spotType,pricePerHour,parkingLot);
+         spot.setParkingLot(parkingLot);
+
+        List<Spot> spotList = parkingLot.getSpotList();
+
+        if(spotList == null){
+            spotList = new ArrayList<>();
+        }
           spotList.add(spot);
           parkingLot.setSpotList(spotList);
           parkingLotRepository1.save(parkingLot);
@@ -70,17 +78,22 @@ public class ParkingLotServiceImpl implements ParkingLotService {
 
         ParkingLot parkingLot = parkingLotRepository1.findById(parkingLotId).get();
 
+        Spot spot = null;
+
             List<Spot> spotList = parkingLot.getSpotList();
-            for(Spot spot:spotList){
-                if(spot.getId() == spotId){
-                    spot.setPricePerHour(pricePerHour);
-                    spot.setParkingLot(parkingLot);
-                    spot.setSpotType(SpotType.TWO_WHEELER);
-                    spotRepository1.save(spot);
-                    return spot;
+
+            if(spotList != null) {
+                for (Spot spot1 : spotList) {
+                    if (spot1.getId() == spotId) {
+                        spot1.setPricePerHour(pricePerHour);
+                        spot1.setParkingLot(parkingLot);
+                        spot = spot1;
+                    }
                 }
             }
-            return  null;
+            parkingLotRepository1.save(parkingLot);
+            spotRepository1.save(spot);
+            return  spot;
 
     }
 
